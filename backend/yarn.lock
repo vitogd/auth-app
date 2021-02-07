@@ -150,6 +150,11 @@ ansi-styles@^4.0.0, ansi-styles@^4.1.0:
   dependencies:
     color-convert "^2.0.1"
 
+ansikit@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/ansikit/-/ansikit-1.5.0.tgz#8925b9a29019e25a91d0f7a4d639be8c039982db"
+  integrity sha512-/7dpnqMHs2gGNyAw22S5ld5F3LEYXma46u+EN/FtOg0BdtyHS9A3txNN2ckLSHZ9gqJ3qYmXEJ17Zq2RGjFtBg==
+
 any-promise@^1.0.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/any-promise/-/any-promise-1.3.0.tgz#abc6afeedcea52e809cdc0376aed3ce39635d17f"
@@ -950,6 +955,13 @@ latest-version@^5.0.0:
   integrity sha512-weT+r0kTkRQdCdYCNtkMwWXQTMEswKrFBkm4ckQOMVhhqhIMI1UT2hMj+1iigIhgSZm5gTmrRXBNoGUgaTY1xA==
   dependencies:
     package-json "^6.3.0"
+
+loggaby@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/loggaby/-/loggaby-4.0.1.tgz#2e4ed93c283291822bdd58357d9058a9ae05e143"
+  integrity sha512-QTmDe372hGzVVBekvWZadHXm4p7ZSOHaoPSe3vDkSGNnEj5fT/upKYsLSitM6gtLitnxpORfuzT7UjTwrXZ1tA==
+  dependencies:
+    ansikit "^1.5.0"
 
 lowercase-keys@^1.0.0, lowercase-keys@^1.0.1:
   version "1.0.1"

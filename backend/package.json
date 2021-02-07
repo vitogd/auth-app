@@ -15,6 +15,7 @@
       "body-parser": "^1.18.1",
       "express": "^4.15.4",
       "http-errors": "^1.8.0",
+      "loggaby": "^4.0.1",
       "nodemon": "^2.0.7",
       "pg": "^8.4.0",
       "reflect-metadata": "^0.1.10",
