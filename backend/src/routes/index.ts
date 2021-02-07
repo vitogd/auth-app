@@ -1,6 +1,7 @@
 import { Router, Request, Response, NextFunction } from "express";
 import { HttpError } from "http-errors";
 import createHttpError = require("http-errors");
+import userRoutes from "./user.routes";
 
 const routes = Router();
 
@@ -9,6 +10,8 @@ routes.get("/", (request: Request, response: Response) => {
     message: "Hello world!",
   });
 });
+
+routes.use("/users", userRoutes);
 
 routes.use((request: Request, response: Response, next: NextFunction) => {
   const error = new createHttpError.NotFound();
