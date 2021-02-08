@@ -1,5 +1,5 @@
-import Head from 'next/head'
-import { Center } from "@chakra-ui/react"
+import Head from "next/head";
+import { Center } from "@chakra-ui/react";
 
 export default function Home() {
   return (
@@ -7,13 +7,29 @@ export default function Home() {
       <Head>
         <title>auth-app</title>
         <link rel="icon" href="/favicon.ico" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+          rel="stylesheet"
+        />
+
+        <style jsx global>{`
+          html,
+          body {
+            padding: 0;
+            margin: 0;
+            font-family: Noto Sans;
+          }
+
+          * {
+            box-sizing: border-box;
+          }
+        `}</style>
       </Head>
 
       <Center>
-        <h1>
-          Hello World!
-        </h1>
+        <h1>Hello World!</h1>
       </Center>
     </div>
-  )
+  );
 }
