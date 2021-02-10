@@ -1,13 +1,12 @@
 import Head from "next/head";
 import { Flex } from "@chakra-ui/react";
-import RegisterForm from "../components/RegisterForm";
+import Form from "../components/form/Form";
 
 export default function Home() {
   return (
     <div>
       <Head>
         <title>Register</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <Flex
@@ -16,7 +15,7 @@ export default function Home() {
         align="center"
         justifyContent="center"
       >
-        <RegisterForm />
+        <Form type="register" />
       </Flex>
     </div>
   );
