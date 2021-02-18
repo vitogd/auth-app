@@ -24,10 +24,10 @@ routes.use(function (
   response: Response,
   next: NextFunction
 ) {
-  response.status(error.status);
+  response.status(error.status || 500);
   response.json({
     error: {
-      status: error.status,
+      status: error.status || 500,
       message: error.message,
     },
   });
