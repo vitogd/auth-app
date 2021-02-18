@@ -17,6 +17,7 @@
       "body-parser": "^1.18.1",
       "dotenv": "^8.2.0",
       "express": "^4.15.4",
+      "express-validator": "^6.9.2",
       "http-errors": "^1.8.0",
       "loggaby": "^4.0.1",
       "morgan": "^1.10.0",
