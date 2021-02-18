@@ -12,7 +12,7 @@ class UserController {
 
     const res = await repository.find();
 
-    return response.status(200).json(res);
+    response.status(200).json(res);
   }
 
   async getOne(request: Request, response: Response, next: NextFunction) {
@@ -26,10 +26,10 @@ class UserController {
     const res = await repository.findOne(request.params.id);
 
     if (!res) {
-      return next(new createHttpError.NotFound());
+      throw new createHttpError.NotFound();
     }
 
-    return response.status(200).json(res);
+    response.status(200).json(res);
   }
 
   async create(request: Request, response: Response, next: NextFunction) {
@@ -37,7 +37,7 @@ class UserController {
 
     const errors = validationResult(request);
     if (!errors.isEmpty()) {
-      return next(new createHttpError.BadRequest());
+      throw new createHttpError.BadRequest();
     }
 
     const { name, email, password } = request.body;
@@ -45,13 +45,13 @@ class UserController {
     const userExists = await repository.findOne({ where: { email } });
 
     if (userExists) {
-      return next(new createHttpError.Conflict());
+      throw new createHttpError.Conflict();
     }
 
     const user = repository.create({ name, email, password });
     await repository.save(user);
 
-    return response.status(201).json(user);
+    response.status(201).json(user);
   }
 
   async update(request: Request, response: Response, next: NextFunction) {
@@ -60,7 +60,7 @@ class UserController {
 
     const errors = validationResult(request);
     if (!errors.isEmpty()) {
-      return next(new createHttpError.BadRequest());
+      throw new createHttpError.BadRequest();
     }
 
     const users = await repository.update(id, request.body);
@@ -70,13 +70,13 @@ class UserController {
       userUpdated.hashPassword();
       repository.save(userUpdated);
 
-      return response.status(200).json({
+      response.status(200).json({
         message: "user updated",
         data: userUpdated,
       });
     }
 
-    return next(new createHttpError.NotFound());
+    throw new createHttpError.NotFound();
   }
 
   async delete(request: Request, response: Response, next: NextFunction) {
@@ -85,18 +85,18 @@ class UserController {
 
     const errors = validationResult(request);
     if (!errors.isEmpty()) {
-      return next(new createHttpError.BadRequest());
+      throw new createHttpError.BadRequest();
     }
 
     const userDeleted = await repository.delete(id);
 
     if (userDeleted.affected >= 1) {
-      return response.status(200).json({
+      response.status(200).json({
         message: "user deleted",
       });
     }
 
-    return next(new createHttpError.NotFound());
+    throw new createHttpError.NotFound();
   }
 }
 
