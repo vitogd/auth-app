@@ -11,8 +11,18 @@ class UserController {
     const repository = getRepository(User);
 
     const res = await repository.find();
+    response.json(res);
+  }
 
-    response.status(200).json(res);
+  async dashboard(request: Request, response: Response, next: NextFunction) {
+    const errors = validationResult(request);
+    if (!errors.isEmpty()) {
+      throw new createHttpError.BadRequest();
+    }
+
+    const user = await getRepository(User).findOne(request.userID);
+
+    response.status(200).json({ message: "user authenticated", user });
   }
 
   async getOne(request: Request, response: Response, next: NextFunction) {
