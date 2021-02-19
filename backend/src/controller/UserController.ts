@@ -32,28 +32,6 @@ class UserController {
     response.status(200).json(res);
   }
 
-  async create(request: Request, response: Response, next: NextFunction) {
-    const repository = getCustomRepository(UserRepository);
-
-    const errors = validationResult(request);
-    if (!errors.isEmpty()) {
-      throw new createHttpError.BadRequest();
-    }
-
-    const { name, email, password } = request.body;
-
-    const userExists = await repository.findByEmail(email);
-
-    if (userExists) {
-      throw new createHttpError.Conflict();
-    }
-
-    const user = repository.create({ name, email, password });
-    await repository.save(user);
-
-    response.status(201).json(user);
-  }
-
   async update(request: Request, response: Response, next: NextFunction) {
     const repository = getRepository(User);
     const { id } = request.params;

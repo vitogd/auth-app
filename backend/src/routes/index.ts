@@ -1,6 +1,7 @@
 import { Router, Request, Response, NextFunction } from "express";
 import { HttpError } from "http-errors";
 import createHttpError = require("http-errors");
+import authRoutes from "./auth.routes";
 import userRoutes from "./user.routes";
 
 const routes = Router();
@@ -12,6 +13,8 @@ routes.get("/", (request: Request, response: Response) => {
 });
 
 routes.use("/users", userRoutes);
+
+routes.use("/auth", authRoutes);
 
 routes.use((request: Request, response: Response, next: NextFunction) => {
   next(new createHttpError.NotFound());
