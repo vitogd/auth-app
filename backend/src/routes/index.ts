@@ -14,8 +14,7 @@ routes.get("/", (request: Request, response: Response) => {
 routes.use("/users", userRoutes);
 
 routes.use((request: Request, response: Response, next: NextFunction) => {
-  const error = new createHttpError.NotFound();
-  next(error);
+  next(new createHttpError.NotFound());
 });
 
 routes.use(function (

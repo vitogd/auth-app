@@ -2,7 +2,7 @@ import { Router } from "express";
 import { body, param } from "express-validator";
 
 import UserController from "../controller/UserController";
-import CatchAsync = require("../utils/CatchAsync");
+import CatchAsync = require("../middlewares/CatchAsync");
 
 const userRoutes = Router();
 

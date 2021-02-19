@@ -4,7 +4,6 @@ import createHttpError = require("http-errors");
 import { getRepository } from "typeorm";
 
 import { User } from "../entity/User";
-import { logger } from "../utils/Logger";
 
 class UserController {
   async getAll(request: Request, response: Response, next: NextFunction) {
@@ -70,10 +69,7 @@ class UserController {
       userUpdated.hashPassword();
       repository.save(userUpdated);
 
-      response.status(200).json({
-        message: "user updated",
-        data: userUpdated,
-      });
+      response.status(200).json(userUpdated);
     }
 
     throw new createHttpError.NotFound();
