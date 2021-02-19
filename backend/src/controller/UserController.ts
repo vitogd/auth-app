@@ -1,9 +1,10 @@
 import { Request, Response, NextFunction } from "express";
 import { validationResult } from "express-validator";
 import createHttpError = require("http-errors");
-import { getRepository } from "typeorm";
+import { getCustomRepository, getRepository } from "typeorm";
 
 import { User } from "../entity/User";
+import { UserRepository } from "../repositories/UserRepository";
 
 class UserController {
   async getAll(request: Request, response: Response, next: NextFunction) {
@@ -32,7 +33,7 @@ class UserController {
   }
 
   async create(request: Request, response: Response, next: NextFunction) {
-    const repository = getRepository(User);
+    const repository = getCustomRepository(UserRepository);
 
     const errors = validationResult(request);
     if (!errors.isEmpty()) {
@@ -41,7 +42,7 @@ class UserController {
 
     const { name, email, password } = request.body;
 
-    const userExists = await repository.findOne({ where: { email } });
+    const userExists = await repository.findByEmail(email);
 
     if (userExists) {
       throw new createHttpError.Conflict();
