@@ -2,14 +2,14 @@ import "reflect-metadata";
 import * as express from "express";
 import * as bodyParser from "body-parser";
 import morgan = require("morgan");
-require('dotenv').config()
+require("dotenv").config();
 
 import routes from "./routes";
-import './database';
+import "./database";
 
 const app = express();
 app.use(bodyParser.json());
-app.use(morgan("dev"))
+app.use(morgan("dev"));
 
 app.use(routes);
 
