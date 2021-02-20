@@ -8,9 +8,12 @@ import {
 } from "@chakra-ui/react";
 import { EmailIcon, LockIcon } from "@chakra-ui/icons";
 
-import { FormProps } from "./FormProps";
+interface FormControlProps {
+  buttonText: string;
+  onButtonClicked: Function;
+}
 
-export function FormControl(props: FormProps) {
+export function FormControl(props: FormControlProps) {
   return (
     <Stack spacing={4}>
       <InputGroup>
@@ -28,11 +31,13 @@ export function FormControl(props: FormProps) {
         <Input type="password" placeholder="Password" borderColor="gray.300" />
       </InputGroup>
 
-      <Button size="md" colorScheme="messenger">
-        {props.type == "register" ? "Start coding now" : "Login"}
+      <Button
+        size="md"
+        colorScheme="messenger"
+        onClick={() => props.onButtonClicked()}
+      >
+        {props.buttonText}
       </Button>
     </Stack>
   );
 }
-
-// TODO: Implement validation here based on form type
