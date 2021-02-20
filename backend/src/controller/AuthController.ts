@@ -35,7 +35,7 @@ class AuthController {
       throw new createHttpError.NotFound();
     }
 
-    const passwordMatch = compare(password, user.password);
+    const passwordMatch = await compare(password, user.password);
 
     if (!passwordMatch) {
       throw new createHttpError.Unauthorized();
