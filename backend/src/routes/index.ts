@@ -1,6 +1,8 @@
 import { Router, Request, Response, NextFunction } from "express";
 import { HttpError } from "http-errors";
 import createHttpError = require("http-errors");
+import ApiKey = require("../middlewares/ApiKey");
+import CatchAsync = require("../middlewares/CatchAsync");
 import authRoutes from "./auth.routes";
 import userRoutes from "./user.routes";
 
@@ -11,6 +13,8 @@ routes.get("/", (request: Request, response: Response) => {
     message: "Hello world!",
   });
 });
+
+routes.use(CatchAsync(ApiKey));
 
 routes.use("/users", userRoutes);
 

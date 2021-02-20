@@ -18,6 +18,6 @@ export = async (request: Request, response: Response, next: NextFunction) => {
 
   request.userID = user.id;
 
-  response.status(202).set("user", user.id);
+  response.status(202);
   next();
 };
