@@ -1,17 +1,12 @@
 import { Request, Response, NextFunction } from "express";
 import { validationResult } from "express-validator";
 import createHttpError = require("http-errors");
-import { getCustomRepository, getRepository } from "typeorm";
 
-import { User } from "../entity/User";
-import { UserRepository } from "../repositories/UserRepository";
+import UserService from "../services/UserService";
 
 class UserController {
   async getAll(request: Request, response: Response, next: NextFunction) {
-    const repository = getRepository(User);
-
-    const res = await repository.find();
-    response.json(res);
+    response.status(200).json(await UserService.findAll());
   }
 
   async dashboard(request: Request, response: Response, next: NextFunction) {
@@ -20,20 +15,18 @@ class UserController {
       throw new createHttpError.BadRequest();
     }
 
-    const user = await getRepository(User).findOne(request.userID);
+    const user = await UserService.findOne(request.userID);
 
     response.status(200).json({ message: "user authenticated", user });
   }
 
   async getOne(request: Request, response: Response, next: NextFunction) {
-    const repository = getRepository(User);
-
     const errors = validationResult(request);
     if (!errors.isEmpty()) {
       throw new createHttpError.BadRequest();
     }
 
-    const res = await repository.findOne(request.params.id);
+    const res = await UserService.findOne(request.params.id);
 
     if (!res) {
       throw new createHttpError.NotFound();
@@ -43,7 +36,6 @@ class UserController {
   }
 
   async update(request: Request, response: Response, next: NextFunction) {
-    const repository = getRepository(User);
     const { id } = request.params;
 
     const errors = validationResult(request);
@@ -51,21 +43,16 @@ class UserController {
       throw new createHttpError.BadRequest();
     }
 
-    const users = await repository.update(id, request.body);
+    const usersUpdated = await UserService.update(id, request.body);
 
-    if (users.affected >= 1) {
-      const userUpdated = await repository.findOne(id);
-      userUpdated.hashPassword();
-      repository.save(userUpdated);
-
-      response.status(200).json(userUpdated);
+    if (!usersUpdated) {
+      throw new createHttpError.NotFound();
     }
 
-    throw new createHttpError.NotFound();
+    response.status(200).json(usersUpdated);
   }
 
   async delete(request: Request, response: Response, next: NextFunction) {
-    const repository = getRepository(User);
     const { id } = request.params;
 
     const errors = validationResult(request);
@@ -73,15 +60,15 @@ class UserController {
       throw new createHttpError.BadRequest();
     }
 
-    const userDeleted = await repository.delete(id);
+    const usersDeleted = await UserService.delete(id);
 
-    if (userDeleted.affected >= 1) {
-      response.status(200).json({
-        message: "user deleted",
-      });
+    if (!usersDeleted) {
+      throw new createHttpError.NotFound();
     }
 
-    throw new createHttpError.NotFound();
+    response.status(200).json({
+      message: "user deleted",
+    });
   }
 }
 
