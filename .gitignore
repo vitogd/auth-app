@@ -7,3 +7,4 @@ temp/
 .env
 .next/
 database.sqlite
+next.config.js
