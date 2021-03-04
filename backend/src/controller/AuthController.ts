@@ -48,10 +48,12 @@ class AuthController {
 
   async verify(request: Request, response: Response, next: NextFunction) {
     const { token } = request.body;
+    const { user } = jwt.verify(token) as any;
 
-    if (jwt.verify(token)) {
+    if (user) {
       response.status(200).json({
         ok: true,
+        user,
       });
     }
   }
