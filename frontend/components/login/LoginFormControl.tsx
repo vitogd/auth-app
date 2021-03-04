@@ -17,7 +17,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { api } from "../../api";
 
-interface RegisterFormData {
+interface LoginFormData {
   name: string;
   email: string;
   password: string;
@@ -29,7 +29,7 @@ const schema = yup.object().shape({
   password: yup.string().required("Password is required").min(8).max(50),
 });
 
-export function RegisterFormControl() {
+export function LoginFormControl() {
   const toast = useToast();
 
   const { register, handleSubmit, errors } = useForm({
