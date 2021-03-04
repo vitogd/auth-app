@@ -7,6 +7,7 @@ import {
   Icon,
   InputLeftElement,
   FormControl,
+  useToast,
 } from "@chakra-ui/react";
 import { EmailIcon, LockIcon } from "@chakra-ui/icons";
 import { FaUserAlt } from "react-icons/fa";
@@ -14,6 +15,7 @@ import { FaUserAlt } from "react-icons/fa";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { api } from "../../api/api";
 
 interface RegisterFormData {
   name: string;
@@ -28,12 +30,34 @@ const schema = yup.object().shape({
 });
 
 export function RegisterFormControl() {
+  const toast = useToast();
+
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(schema),
   });
 
   const onSubmit = (data: RegisterFormData, e: any) => {
-    console.log(data);
+    const { name, email, password } = data;
+    api
+      .post("/auth/register", {
+        name,
+        email,
+        password,
+      })
+      .then(() => (window.location.href = "/login"))
+      .catch((err) => {
+        const errorMessage = err.response.data.error.message;
+        toast({
+          title: "There's an error:",
+          description:
+            errorMessage == "Conflict"
+              ? "Your email is already registered"
+              : errorMessage,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      });
     e.target.reset();
   };
 
