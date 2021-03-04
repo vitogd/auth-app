@@ -45,6 +45,16 @@ class AuthController {
 
     response.status(201).json({ user, token });
   }
+
+  async verify(request: Request, response: Response, next: NextFunction) {
+    const { token } = request.body;
+
+    if (jwt.verify(token)) {
+      response.status(200).json({
+        ok: true,
+      });
+    }
+  }
 }
 
 export default new AuthController();

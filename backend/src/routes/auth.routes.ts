@@ -20,4 +20,10 @@ authRoutes.post(
   CatchAsync(AuthController.login)
 );
 
+authRoutes.get(
+  "/verify",
+  body("token").isString(),
+  CatchAsync(AuthController.verify)
+);
+
 export default authRoutes;
