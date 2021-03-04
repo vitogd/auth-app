@@ -12,19 +12,6 @@ export default function Home() {
           href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
           rel="stylesheet"
         />
-
-        <style jsx global>{`
-          html,
-          body {
-            padding: 0;
-            margin: 0;
-            font-family: Noto Sans;
-          }
-
-          * {
-            box-sizing: border-box;
-          }
-        `}</style>
       </Head>
 
       <Center>
