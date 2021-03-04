@@ -41,7 +41,10 @@ export function LoginFormControl() {
         email,
         password,
       })
-      .then(() => (window.location.href = "/"))
+      .then((response) => {
+        localStorage.setItem("token", response.data.token);
+        window.location.href = "/";
+      })
       .catch((err) => {
         const errorMessage = err.response.data.error.message;
         toast({
