@@ -18,15 +18,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { api } from "../../api";
 
 interface LoginFormData {
-  name: string;
   email: string;
   password: string;
 }
 
 const schema = yup.object().shape({
-  name: yup.string().required("Name is required").min(5).max(50),
   email: yup.string().required("Email is required").email(),
-  password: yup.string().required("Password is required").min(8).max(50),
+  password: yup.string().required("Password is required"),
 });
 
 export function LoginFormControl() {
@@ -36,23 +34,19 @@ export function LoginFormControl() {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data: RegisterFormData, e: any) => {
-    const { name, email, password } = data;
+  const onSubmit = (data: LoginFormData, e: any) => {
+    const { email, password } = data;
     api
-      .post("/auth/register", {
-        name,
+      .post("/auth/login", {
         email,
         password,
       })
-      .then(() => (window.location.href = "/login"))
+      .then(() => (window.location.href = "/"))
       .catch((err) => {
         const errorMessage = err.response.data.error.message;
         toast({
           title: "There's an error:",
-          description:
-            errorMessage == "Conflict"
-              ? "Your email is already registered"
-              : errorMessage,
+          description: errorMessage,
           status: "error",
           duration: 5000,
           isClosable: true,
@@ -64,22 +58,6 @@ export function LoginFormControl() {
   return (
     <form onSubmit={handleSubmit((data, event) => onSubmit(data, event))}>
       <Stack>
-        <FormControl isInvalid={!!errors.name}>
-          <InputGroup>
-            <InputLeftElement
-              pointerEvents="none"
-              children={<Icon as={FaUserAlt} color="gray.500" />}
-            />
-            <Input
-              placeholder="Name"
-              borderColor="gray.300"
-              name="name"
-              id="name"
-              ref={register}
-            />
-          </InputGroup>
-        </FormControl>
-
         <FormControl isInvalid={!!errors.email}>
           <InputGroup>
             <InputLeftElement
@@ -114,7 +92,7 @@ export function LoginFormControl() {
         </FormControl>
 
         <Button size="md" colorScheme="messenger" type="submit">
-          Start coding now
+          Login
         </Button>
       </Stack>
     </form>
