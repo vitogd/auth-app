@@ -122,6 +122,11 @@
   resolved "https://registry.yarnpkg.com/@types/uuid-validate/-/uuid-validate-0.0.1.tgz#b4eedecbd9db25851490d65a58f13feaa89dd509"
   integrity sha512-RbX9q0U00SLoV+l7loYX0Wrtv4QTClBC0QcdNts6x2b5G1HJN8NI9YlS1HNA6THrI9EH3OXSgya6eMQIlDjKFA==
 
+"@types/validator@^13.1.3":
+  version "13.1.3"
+  resolved "https://registry.yarnpkg.com/@types/validator/-/validator-13.1.3.tgz#366b394aa3fbeed2392bf0a20ded606fa4a3d35e"
+  integrity sha512-DaOWN1zf7j+8nHhqXhIgNmS+ltAC53NXqGxYuBhWqWgqolRhddKzfZU814lkHQSTG0IUfQxU7Cg0gb8fFWo2mA==
+
 abbrev@1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
@@ -458,6 +463,15 @@ ci-info@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ci-info/-/ci-info-2.0.0.tgz#67a9e964be31a51e15e5010d58e6f12834002f46"
   integrity sha512-5tK7EtrZ0N+OLFMthtqOj4fI2Jeb88C4CAZPu25LDVUgXJ0A3Js4PMGqrn0JU1W0Mh1/Z8wZzYPxqUrXeBboCQ==
+
+class-validator@^0.13.1:
+  version "0.13.1"
+  resolved "https://registry.yarnpkg.com/class-validator/-/class-validator-0.13.1.tgz#381b2001ee6b9e05afd133671fbdf760da7dec67"
+  integrity sha512-zWIeYFhUitvAHBwNhDdCRK09hWx+P0HUwFE8US8/CxFpMVzkUK8RJl7yOIE+BVu2lxyPNgeOaFv78tLE47jBIg==
+  dependencies:
+    "@types/validator" "^13.1.3"
+    libphonenumber-js "^1.9.7"
+    validator "^13.5.2"
 
 cli-boxes@^2.2.0:
   version "2.2.1"
@@ -1350,6 +1364,11 @@ latest-version@^5.0.0:
   integrity sha512-weT+r0kTkRQdCdYCNtkMwWXQTMEswKrFBkm4ckQOMVhhqhIMI1UT2hMj+1iigIhgSZm5gTmrRXBNoGUgaTY1xA==
   dependencies:
     package-json "^6.3.0"
+
+libphonenumber-js@^1.9.7:
+  version "1.9.13"
+  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.9.13.tgz#41ecc8635103c5af44be422f0606a518022248fd"
+  integrity sha512-DOvAj9Now6KqP+L1Q3JrM3iNhH/mXiOPTj6kxb9OnJbYsVYRlVdvRY1kCpU3Tz9VegIEi6MgDrviBaAnvB3aSw==
 
 lodash.includes@^4.3.0:
   version "4.3.0"

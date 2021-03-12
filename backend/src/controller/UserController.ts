@@ -9,17 +9,6 @@ class UserController {
     response.status(200).json(await UserService.findAll());
   }
 
-  async dashboard(request: Request, response: Response, next: NextFunction) {
-    const errors = validationResult(request);
-    if (!errors.isEmpty()) {
-      throw new createHttpError.BadRequest();
-    }
-
-    const user = await UserService.findOne(request.userID);
-
-    response.status(200).json({ message: "user authenticated", user });
-  }
-
   async getOne(request: Request, response: Response, next: NextFunction) {
     const errors = validationResult(request);
     if (!errors.isEmpty()) {
@@ -50,25 +39,6 @@ class UserController {
     }
 
     response.status(200).json(usersUpdated);
-  }
-
-  async delete(request: Request, response: Response, next: NextFunction) {
-    const { id } = request.params;
-
-    const errors = validationResult(request);
-    if (!errors.isEmpty()) {
-      throw new createHttpError.BadRequest();
-    }
-
-    const usersDeleted = await UserService.delete(id);
-
-    if (!usersDeleted) {
-      throw new createHttpError.NotFound();
-    }
-
-    response.status(200).json({
-      message: "user deleted",
-    });
   }
 }
 
